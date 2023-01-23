@@ -10,13 +10,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-
-        choose_turn choose_turn=new choose_turn();
-
-        game_stream.choose_turn.choose_character();
-
-
-
         Table table = new Table();
         int[][] arr = {{0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0},
@@ -26,6 +19,14 @@ public class Main {
                 {0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0}};
         table.setborder(arr);
+
+        choose_turn choose_turn=new choose_turn();
+        game_stream.choose_turn.choose_character();
+
+
+
+
+
 
 //
 

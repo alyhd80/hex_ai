@@ -8,15 +8,12 @@ import java.util.Scanner;
 public class game_loop {
 
 
-    public static void game_start() {
+    public  void game_start() {
 
 
         while (true) {
-            Scanner scanner = new Scanner(System.in);
 
-            int column = scanner.nextInt();
-            int row = scanner.nextInt();
-
+showBorder();
 
         }
 
@@ -24,8 +21,10 @@ public class game_loop {
     }
 
     public static void showBorder() {
-
+        Scanner scanner = new Scanner(System.in);
         Table table = new Table();
+
+        make_line();
 
         System.out.println("  1 2 3 4 5 6 7");
         for (int i = 0; i < table.border.length; i++) {
@@ -41,5 +40,17 @@ public class game_loop {
             System.out.println();
         }
 
+
+        System.out.println("whitch row?");
+        int row = scanner.nextInt();
+        System.out.println("whitch column?");
+        int column = scanner.nextInt();
+
     }
+
+    public static void make_line(){
+        for (int i=0;i<20;i++)
+            System.out.println();
+    }
+
 }
