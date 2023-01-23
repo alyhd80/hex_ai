@@ -14,6 +14,10 @@ public class game_loop {
         while (true) {
 
 showBorder();
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("ai");
+            int tst=scanner.nextInt();
 
         }
 
@@ -35,7 +39,15 @@ showBorder();
                 }
                 System.out.print((i + 1) + " ");
                 for (int j = 0; j < table.border[i].length; j++) {
-                    System.out.print(table.border[i][j] + " ");
+                    if(table.border[i][j]==1){
+                        System.out.print("R"+ " ");
+
+                    }else if(table.border[i][j]==2) {
+                        System.out.print("C"+ " ");
+
+                    }else {
+                        System.out.print(table.border[i][j] + " ");
+                    }
                 }
                 System.out.println();
             }
@@ -48,7 +60,7 @@ showBorder();
 
             if (table.border[row-1][column-1] == 0) {
                 table.border[row-1][column-1]=1;
-
+break;
             }
         }
 
