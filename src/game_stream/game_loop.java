@@ -10,17 +10,46 @@ public class game_loop {
 
     public  void game_start() {
 
-        int min = Integer.MIN_VALUE;
-        int max = Integer.MAX_VALUE;
+        AI_chose ai_chose = new AI_chose();
+        Table table = new Table();
+        //int min = Integer.MIN_VALUE;
+        //int max = Integer.MAX_VALUE;
+        int min = -10000;
+        int max = 10000;
+        int[][] array = new int[7][7];
+
+        int iholder = 1;
+        int jholder = 1;
 
         while (true) {
 
-        showBorder();
-        AI_chose ai_chose = new AI_chose();
-        Table table = new Table();
+            int hex = -10000;
+            showBorder();
 
-        ai_chose.negamax(table.getGraph(), 6, min, max, 'R');
+            for (int i = 0;i < table.getborder().length; i++){
+                for (int j = 0; j < table.getborder().length; j++) {
+                    array[i][j] = ai_chose.negamax(table.getGraph(), 1, min, max, 2);
+                    if (hex < array[i][j]){
+                        hex = array[i][j];
+                        iholder = i;
+                        jholder = j;
+                    }
+                }
+            }
+            table.border[iholder][jholder] = 2;
         }
+    }
+
+    public static int findMax(int[][] array){
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (max > array[i][j]){
+                    max = array[i][j];
+                }
+            }
+        }
+        return max;
     }
 
     public static void showBorder() {

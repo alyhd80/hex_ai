@@ -12,11 +12,11 @@ public class AI_chose {
     int value = Integer.MIN_VALUE;
     int[][] list = new int[7][7];
     int temp = 0;
-    public int negamax(int[][] cur_table, int depth, int alpha, int beta, char color){
+    public int negamax(int[][] cur_table, int depth, int alpha, int beta, int color){
         Table table = new Table();
         table.setGraph(cur_table);
 
-        int dijkstra = shortestPath.dijkstra(table.getGraph(), 0, 7);
+        int dijkstra = shortestPath.dijkstra(table.getGraph(), 0, 6);
 
         //+winning check for every step of this part
         // which has not been written yet ------------------------------------------------------------------
@@ -24,21 +24,28 @@ public class AI_chose {
             return color * dijkstra;
         }
 
-        list = table.listOfMoves();
+        list = table.listOfMoves(table.getGraph(), color);
+
+        System.out.println(depth);
 
         for (int i = 0; i <= table.getborder().length; i++) {
             for (int j = 0; j <= table.getborder().length; j++) {
-                temp = negamax(list, depth - 1, - alpha, - beta, color);
-                if (value < temp)
+                System.out.println("alpha:" + alpha);
+                System.out.println("beta:" + beta);
+                temp = negamax(list, depth - 1, -alpha, -beta, color);
+                if (value < -temp) {
                     value = temp;
-                if (alpha < value)
+                }
+                if (alpha < value) {
                     alpha = value;
-                if (alpha > beta)
-                    break;
+                }
+                if (alpha >= beta) {
+                    System.out.println("---------------------------------------------------------------");
+                    return value;
+                }
             }
         }
         return value;
-
     }
 
 
@@ -63,19 +70,19 @@ class ShortestPath {
                 min = dist[v];
                 min_index = v;
             }
-        System.out.println(min_index);
+            //System.out.println(min_index + "\n" + min);
         return min_index;
     }
 
     // A utility function to print the constructed distance
     // array
-    void printSolution(int dist[])
-    {
-        System.out.println(
-                "Vertex \t\t Distance from Source");
-        for (int i = 0; i < V; i++)
-            System.out.println(i + " \t\t " + dist[i]);
-    }
+    //    void printSolution(int dist[])
+    //    {
+    //        System.out.println(
+    //                "Vertex \t\t Distance from Source");
+    //        for (int i = 0; i < V; i++)
+    //            System.out.println(i + " \t\t " + dist[i]);
+    //    }
 
     // Function that implements Dijkstra's single source
     // the shortest path algorithm for a graph represented using
@@ -124,10 +131,7 @@ class ShortestPath {
                         && dist[u] + graph[u][v] < dist[v])
                     dist[v] = dist[u] + graph[u][v];
         }
-        System.out.println(dist[sink]);
         // print the constructed distance array
-        return dist[sink];
+        return 10000 - dist[sink];
     }
 }
-// This code is contributed by Aakash Hasija
-

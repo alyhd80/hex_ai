@@ -12,12 +12,12 @@ public class Main {
 
         Table table = new Table();
         int[][] arr = {
-                {0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0}
         };
         int graph[][]
@@ -35,7 +35,7 @@ public class Main {
         table.setborder(arr);
 
         choose_turn choose_turn=new choose_turn();
-        table.setGraph(graph);
+        table.setGraph(table.getborder());
         game_stream.choose_turn.choose_character();
 
 
