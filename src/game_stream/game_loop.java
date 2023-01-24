@@ -10,16 +10,17 @@ public class game_loop {
 
     public  void game_start() {
 
+        int min = Integer.MIN_VALUE;
+        int max = Integer.MAX_VALUE;
 
         while (true) {
 
         showBorder();
         AI_chose ai_chose = new AI_chose();
         Table table = new Table();
-        ai_chose.getShortestPath().dijkstra(table.getGraph(), 0);
+
+        ai_chose.negamax(table.getGraph(), 6, min, max, 'R');
         }
-
-
     }
 
     public static void showBorder() {
@@ -41,7 +42,7 @@ public class game_loop {
                         System.out.print("R" + " ");
 
                     } else if (table.border[i][j] == 2) {
-                        System.out.print("C" + " ");
+                        System.out.print("B" + " ");
 
                     } else {
                         System.out.print(table.border[i][j] + " ");

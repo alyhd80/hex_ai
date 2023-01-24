@@ -35,8 +35,9 @@ public class Main {
         table.setborder(arr);
 
         choose_turn choose_turn=new choose_turn();
-        game_stream.choose_turn.choose_character();
         table.setGraph(graph);
+        game_stream.choose_turn.choose_character();
+
 
 
 
