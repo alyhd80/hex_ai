@@ -30,6 +30,7 @@ public class game_loop {
                 for (int j = 0; j < table.getborder().length; j++) {
                     if (table.border[i][j] == 0) {
                         array[i][j] = ai_chose.negamax(table.getGraph(), 1, min, max, 2);
+                        table.graph[i][j]= array[i][j];
                         if (hex < array[i][j]) {
                             hex = array[i][j];
                             iholder = i;
@@ -38,12 +39,8 @@ public class game_loop {
                     }
                 }
             }
-            for (int i = 0; i < 7; i++){
-                for (int j = 0; j < 7; j++){
-                    System.out.print(table.graph[i][j] + " ");
-                }
-                System.out.println();
-            }
+
+        showgraph();
             checkfillarry(iholder, jholder, 2);
         }
     }
@@ -114,6 +111,37 @@ public class game_loop {
             }
         }
     }
+    public static void showgraph() {
+        Table table = new Table();
+
+
+            make_line();
+            System.out.println("  1 2 3 4 5 6 7");
+            for (int i = 0; i < table.graph.length; i++) {
+                int counter = i;
+
+                for (; counter > 0; counter--) {
+                    System.out.print(" ");
+                }
+                System.out.print((i + 1) + " ");
+                for (int j = 0; j < table.graph[i].length; j++) {
+                    if (table.graph[i][j] == 1) {
+                        System.out.print("R" + " ");
+
+                    } else if (table.graph[i][j] == 2) {
+                        System.out.print("B" + " ");
+
+                    } else {
+                        System.out.print(table.graph[i][j] + " ");
+                    }
+                }
+                System.out.println();
+            }
+
+
+
+    }
+
 
     public static void make_line() {
         for (int i = 0; i < 20; i++)
