@@ -28,15 +28,23 @@ public class game_loop {
 
             for (int i = 0; i < table.getborder().length; i++) {
                 for (int j = 0; j < table.getborder().length; j++) {
-                    array[i][j] = ai_chose.negamax(table.getGraph(), 1, min, max, 2);
-                    if (hex < array[i][j]) {
-                        hex = array[i][j];
-                        iholder = i;
-                        jholder = j;
+                    if (table.border[i][j] == 0) {
+                        array[i][j] = ai_chose.negamax(table.getGraph(), 1, min, max, 2);
+                        if (hex < array[i][j]) {
+                            hex = array[i][j];
+                            iholder = i;
+                            jholder = j;
+                        }
                     }
                 }
             }
-            table.border[iholder][jholder] = 2;
+            for (int i = 0; i < 7; i++){
+                for (int j = 0; j < 7; j++){
+                    System.out.print(table.graph[i][j] + " ");
+                }
+                System.out.println();
+            }
+            checkfillarry(iholder, jholder, 2);
         }
     }
 
@@ -54,7 +62,7 @@ public class game_loop {
     }
 
 
-    public static int findMax(int[][] array) {
+    public static int sort(int[][] array) {
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
