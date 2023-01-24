@@ -16,7 +16,7 @@ public class game_loop {
         showBorder();
         AI_chose ai_chose = new AI_chose();
         Table table = new Table();
-        ai_chose.getShortestPath().dijkstra(table.getborder(), 5);
+        ai_chose.getShortestPath().dijkstra(table.getborder(), 0);
         }
 
 
@@ -37,13 +37,13 @@ public class game_loop {
                 }
                 System.out.print((i + 1) + " ");
                 for (int j = 0; j < table.border[i].length; j++) {
-                    if(table.border[i][j]==1){
-                        System.out.print("R"+ " ");
+                    if (table.border[i][j] == 1) {
+                        System.out.print("R" + " ");
 
-                    }else if(table.border[i][j]==2) {
-                        System.out.print("C"+ " ");
+                    } else if (table.border[i][j] == 2) {
+                        System.out.print("C" + " ");
 
-                    }else {
+                    } else {
                         System.out.print(table.border[i][j] + " ");
                     }
                 }
@@ -51,22 +51,19 @@ public class game_loop {
             }
 
 
-            System.out.println("whitch row?");
+            System.out.println("which row?");
             int row = scanner.nextInt();
-            System.out.println("whitch column?");
+            System.out.println("which column?");
             int column = scanner.nextInt();
 
-            if (table.border[row-1][column-1] == 0) {
-                table.border[row-1][column-1]=1;
-            break;
+            if (table.border[row - 1][column - 1] == 0) {
+                table.border[row - 1][column - 1] = 1;
+                break;
             }
         }
-
     }
-
-    public static void make_line(){
-        for (int i=0;i<20;i++)
-            System.out.println();
-    }
-
+        public static void make_line() {
+            for (int i = 0; i < 20; i++)
+                System.out.println();
+        }
 }
