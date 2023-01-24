@@ -1,5 +1,7 @@
 package game_stream;
 
+import models.Table;
+
 public class AI_chose {
     ShortestPath shortestPath = new ShortestPath();
 
@@ -7,6 +9,37 @@ public class AI_chose {
         return shortestPath;
     }
 
+    int value = Integer.MIN_VALUE;
+    int[][] list = new int[7][7];
+    int temp = 0;
+    public int negamax(int[][] cur_table, int depth, int alpha, int beta, char color){
+        Table table = new Table();
+        table.setGraph(cur_table);
+
+        int dijkstra = shortestPath.dijkstra(table.getGraph(), 0, 7);
+
+        //+winning check for every step of this part
+        // which has not been written yet ------------------------------------------------------------------
+        if (depth == 0){
+            return color * dijkstra;
+        }
+
+        list = table.listOfMoves();
+
+        for (int i = 0; i <= table.getborder().length; i++) {
+            for (int j = 0; j <= table.getborder().length; j++) {
+                temp = negamax(list, depth - 1, - alpha, - beta, color);
+                if (value < temp)
+                    value = temp;
+                if (alpha < value)
+                    alpha = value;
+                if (alpha > beta)
+                    break;
+            }
+        }
+        return value;
+
+    }
 
 
 }
@@ -19,7 +52,7 @@ class ShortestPath {
     // A utility function to find the vertex with minimum
     // distance value, from the set of vertices not yet
     // included in the shortest path tree
-    static final int V = 9;
+    static final int V = 7;
     int minDistance(int dist[], Boolean sptSet[])
     {
         // Initialize min value
@@ -47,7 +80,7 @@ class ShortestPath {
     // Function that implements Dijkstra's single source
     // the shortest path algorithm for a graph represented using
     // adjacency matrix representation
-    public void dijkstra(int graph[][], int src)
+    public int dijkstra(int graph[][], int src, int sink)
     {
         int dist[] = new int[V]; // The output array.
         // dist[i] will hold
@@ -91,9 +124,9 @@ class ShortestPath {
                         && dist[u] + graph[u][v] < dist[v])
                     dist[v] = dist[u] + graph[u][v];
         }
-
+        System.out.println(dist[sink]);
         // print the constructed distance array
-        printSolution(dist);
+        return dist[sink];
     }
 }
 // This code is contributed by Aakash Hasija
