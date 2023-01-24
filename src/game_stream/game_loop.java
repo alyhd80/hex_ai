@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class game_loop {
 
 
-    public  void game_start() {
+    public void game_start() {
 
         AI_chose ai_chose = new AI_chose();
         Table table = new Table();
@@ -26,10 +26,10 @@ public class game_loop {
             int hex = -10000;
             showBorder();
 
-            for (int i = 0;i < table.getborder().length; i++){
+            for (int i = 0; i < table.getborder().length; i++) {
                 for (int j = 0; j < table.getborder().length; j++) {
                     array[i][j] = ai_chose.negamax(table.getGraph(), 1, min, max, 2);
-                    if (hex < array[i][j]){
+                    if (hex < array[i][j]) {
                         hex = array[i][j];
                         iholder = i;
                         jholder = j;
@@ -40,11 +40,25 @@ public class game_loop {
         }
     }
 
-    public static int findMax(int[][] array){
+
+    public static boolean checkfillarry(int i, int j, int color) {
+        Table table = new Table();
+
+        if (table.border[i][j] == 0) {
+            table.border[i][j] = color;
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+    public static int findMax(int[][] array) {
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                if (max > array[i][j]){
+                if (max > array[i][j]) {
                     max = array[i][j];
                 }
             }
@@ -92,8 +106,9 @@ public class game_loop {
             }
         }
     }
-        public static void make_line() {
-            for (int i = 0; i < 20; i++)
-                System.out.println();
-        }
+
+    public static void make_line() {
+        for (int i = 0; i < 20; i++)
+            System.out.println();
+    }
 }
