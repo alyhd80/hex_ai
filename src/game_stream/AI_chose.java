@@ -6,6 +6,9 @@ public class AI_chose {
     public ShortestPath getShortestPath() {
         return shortestPath;
     }
+
+
+
 }
 
 // A Java program for Dijkstra's single source the shortest path
@@ -27,7 +30,7 @@ class ShortestPath {
                 min = dist[v];
                 min_index = v;
             }
-
+        System.out.println(min_index);
         return min_index;
     }
 

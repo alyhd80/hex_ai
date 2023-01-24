@@ -18,8 +18,6 @@ public class game_loop {
         Table table = new Table();
         ai_chose.getShortestPath().dijkstra(table.getGraph(), 0);
         }
-
-
     }
 
     public static void showBorder() {
