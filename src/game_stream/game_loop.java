@@ -13,12 +13,10 @@ public class game_loop {
 
         while (true) {
 
-showBorder();
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("ai");
-            int tst=scanner.nextInt();
-
+        showBorder();
+        AI_chose ai_chose = new AI_chose();
+        Table table = new Table();
+        ai_chose.getShortestPath().dijkstra(table.getborder(), 5);
         }
 
 
@@ -60,7 +58,7 @@ showBorder();
 
             if (table.border[row-1][column-1] == 0) {
                 table.border[row-1][column-1]=1;
-break;
+            break;
             }
         }
 
