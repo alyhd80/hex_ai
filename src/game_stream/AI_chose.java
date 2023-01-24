@@ -16,7 +16,7 @@ class ShortestPath {
     // A utility function to find the vertex with minimum
     // distance value, from the set of vertices not yet
     // included in the shortest path tree
-    static final int V = 7;
+    static final int V = 9;
     int minDistance(int dist[], Boolean sptSet[])
     {
         // Initialize min value

@@ -16,7 +16,7 @@ public class game_loop {
         showBorder();
         AI_chose ai_chose = new AI_chose();
         Table table = new Table();
-        ai_chose.getShortestPath().dijkstra(table.getborder(), 0);
+        ai_chose.getShortestPath().dijkstra(table.getGraph(), 0);
         }
 
 
