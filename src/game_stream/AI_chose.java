@@ -15,7 +15,7 @@ public class AI_chose {
     public int negamax(int[][] cur_table, int depth, int alpha, int beta, int color){
         Table table = new Table();
         table.setGraph(cur_table);
-
+        table.changGragh();
         int dijkstra = shortestPath.dijkstra(table.getGraph(), 0, 6);
 
         //+winning check for every step of this part
