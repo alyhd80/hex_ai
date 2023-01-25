@@ -4,7 +4,17 @@ import java.util.ArrayList;
 
 public class Table {
     public static int[][] border = new int[7][7];
-    public static int[][] graph = new int[49][49];
+    public static int[][] graph = new int[7][7];
+
+    public static int[][] newBoard = new int[7][7];
+
+    public static int[][] getNewBoard() {
+        return newBoard;
+    }
+
+    public static void setNewBoard(int[][] newBoard) {
+        Table.newBoard = newBoard;
+    }
 
     public void setborder(int[][] border) {
         this.border = border;
@@ -37,28 +47,21 @@ public class Table {
     }
 
     public int[][] changGragh() {
-        for (int i = 0; i < 49; i++) {
-            for (int j = 0; j < 49; j++) {
-                graph[i][j] = 1000;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                graph[i][j] = 5000;
             }
         }
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                for (int[] neighbor :
-                        checkAroundArr(i, j)) {
-                    int ni = neighbor[0], nj = neighbor[1];
-                    if (checkBounds(i ,j, ni, nj)){
-                        if (border[i][j] == 1){
-                            continue;
-                        } else if (border[i][j] == 2) {
-                            graph[i*7+j][ni*7+nj] = 0;
-                        } else {
-                            graph[i*7+j][ni*7+nj] = 1;
-                        }
-                    }
+                if (border[i][j] == 2) {
+                    graph[i][j] = 0;
+                } else if (border[i][j] == 0) {
+                    graph[i][j] = 1;
                 }
             }
         }
+        
         return graph;
     }
 
@@ -86,6 +89,10 @@ public class Table {
                     {i, j - 1},
                     {i - 1, j},
             };
+            for (int k = 0; k < 7; k++)
+                if ((i + 1) < 7 && (j + 1) < 7 && (i - 1) > 0 && (j - 1) > 0){
+                    arr[1]= new int[]{1,2};
+                }
 
             return arr;
 

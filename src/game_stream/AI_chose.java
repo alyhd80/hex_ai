@@ -2,6 +2,9 @@ package game_stream;
 
 import models.Table;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 public class AI_chose {
     ShortestPath shortestPath = new ShortestPath();
 
@@ -14,7 +17,7 @@ public class AI_chose {
     int temp = 0;
     public int negamax(int[][] cur_table, int depth, int alpha, int beta, int color){
         Table table = new Table();
-        table.changGragh();
+        table.setGraph(table.changGragh());
 
         int dijkstra = shortestPath.dijkstra(table.getGraph(), 0, 48);
 
@@ -24,9 +27,10 @@ public class AI_chose {
             return color * dijkstra;
         }
 
-        list = table.listOfMoves(table.getGraph(), color);
 
-        System.out.println(depth);
+
+        list = table.getNewBoard();
+
 
         for (int i = 0; i <= table.getborder().length; i++) {
             for (int j = 0; j <= table.getborder().length; j++) {
@@ -55,7 +59,27 @@ public class AI_chose {
 // algorithm. The program is for adjacency matrix
 // representation of the graph
 
+class Task {
+    int dist, row, col;
+
+    public Task(int dist, int row, int col) {
+        this.dist = dist;
+        this.row = row;
+        this.col = col;
+    }
+}
+
+
+class TaskComparator implements Comparator<Task> {
+
+    @Override
+    public int compare(Task o1, Task o2) {
+        return o1.dist - o2.dist;
+    }
+}
+
 class ShortestPath {
+
     // A utility function to find the vertex with minimum
     // distance value, from the set of vertices not yet
     // included in the shortest path tree
@@ -87,50 +111,41 @@ class ShortestPath {
     // Function that implements Dijkstra's single source
     // the shortest path algorithm for a graph represented using
     // adjacency matrix representation
-    public int dijkstra(int graph[][], int src, int sink)
+    public int dijkstra(int graph[][])
     {
-        int dist[] = new int[V]; // The output array.
+        int dist[][] = new int[V][V]; // The output array.
         // dist[i] will hold
         // the shortest distance from src to i
 
         // sptSet[i] will true if vertex I is included in
         // the shortest path tree or shortest distance from src
         // to i is finalized
-        Boolean sptSet[] = new Boolean[V];
 
         // Initialize all distances as INFINITE and stpSet[]
         // as false
         for (int i = 0; i < V; i++) {
-            dist[i] = Integer.MAX_VALUE;
-            sptSet[i] = false;
+            for (int j = 0; j < V; j++) {
+                dist[i][j] = Integer.MAX_VALUE;
+            }
         }
 
-        // Distance of source vertex from itself is always 0
-        dist[src] = 0;
+        PriorityQueue<Task> heap = new PriorityQueue<>(7, new TaskComparator());
 
-        // Find the shortest path for all vertices
-        for (int count = 0; count < V - 1; count++) {
-            // Pick the minimum distance vertex from the set
-            // of vertices not yet processed. u is always
-            // equal to src in first iteration.
-            int u = minDistance(dist, sptSet);
-
-            // Mark the picked vertex as processed
-            sptSet[u] = true;
-
-            // Update dist value of the adjacent vertices of
-            // the picked vertex.
-            for (int v = 0; v < V; v++)
-
-                // Update dist[v] only if is not in sptSet,
-                // there is an edge from u to v, and total
-                // weight of path from src to v through u is
-                // smaller than current value of dist[v]
-                if (!sptSet[v] && graph[u][v] != 0
-                        && dist[u] != Integer.MAX_VALUE
-                        && dist[u] + graph[u][v] < dist[v])
-                    dist[v] = dist[u] + graph[u][v];
+        for (int r = 0; r < 7; r++) {
+            heap.add(Task())
         }
+
+        while (!heap.isEmpty()) {
+            Task task = heap.poll();
+
+            if (dist[task.row][task.col] <= task.dist) {
+                continue;
+            }
+
+            dist[task.row][task.col] = task.dist;
+
+        }
+
         // print the constructed distance array
         return 10000 - dist[sink];
     }
