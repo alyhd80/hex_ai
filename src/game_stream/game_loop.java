@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class game_loop {
 
-
+boolean gameEnd = false;
     public void game_start() {
 
         AI_chose ai_chose = new AI_chose();
@@ -43,6 +43,9 @@ public class game_loop {
         showgraph();
             checkfillarry(iholder, jholder, 2);
         }
+//        if(ai_chose.shortestPath.dijkstra(table.getGraph(), 0 , 7) == 10000){
+//            gameEnd = true;
+//        }
     }
 
 
@@ -59,17 +62,17 @@ public class game_loop {
     }
 
 
-    public static int sort(int[][] array) {
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (max > array[i][j]) {
-                    max = array[i][j];
-                }
-            }
-        }
-        return max;
-    }
+//    public static int sort(int[][] array) {
+//        int max = Integer.MIN_VALUE;
+//        for (int i = 0; i < 7; i++) {
+//            for (int j = 0; j < 7; j++) {
+//                if (max > array[i][j]) {
+//                    max = array[i][j];
+//                }
+//            }
+//        }
+//        return max;
+//    }
 
     public static void showBorder() {
         Scanner scanner = new Scanner(System.in);
@@ -125,15 +128,7 @@ public class game_loop {
                 }
                 System.out.print((i + 1) + " ");
                 for (int j = 0; j < table.graph[i].length; j++) {
-                    if (table.graph[i][j] == 1) {
-                        System.out.print("R" + " ");
-
-                    } else if (table.graph[i][j] == 2) {
-                        System.out.print("B" + " ");
-
-                    } else {
-                        System.out.print(table.graph[i][j] + " ");
-                    }
+                    System.out.print(table.graph[i][j] + " ");
                 }
                 System.out.println();
             }

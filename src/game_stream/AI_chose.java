@@ -14,9 +14,9 @@ public class AI_chose {
     int temp = 0;
     public int negamax(int[][] cur_table, int depth, int alpha, int beta, int color){
         Table table = new Table();
-        table.setGraph(cur_table);
         table.changGragh();
-        int dijkstra = shortestPath.dijkstra(table.getGraph(), 0, 6);
+
+        int dijkstra = shortestPath.dijkstra(table.getGraph(), 0, 48);
 
         //+winning check for every step of this part
         // which has not been written yet ------------------------------------------------------------------
@@ -59,7 +59,7 @@ class ShortestPath {
     // A utility function to find the vertex with minimum
     // distance value, from the set of vertices not yet
     // included in the shortest path tree
-    static final int V = 7;
+    static final int V = 49;
     int minDistance(int dist[], Boolean sptSet[])
     {
         // Initialize min value
